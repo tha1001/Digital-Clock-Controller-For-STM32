@@ -90,3 +90,13 @@ And at the top of the main code, in this section:
 
     #include "LCD/lcd.h"
     #include <stdio.h>
+“Now, before running the code, copy the LCD folder into this path:”
+
+ProjectName\Core\Src
+
+“In the IAR Embedded Workbench coding environment, right-click on the `DRIVERS` folder, then click `Add` and create a new folder named `LCD`. After creating it, right-click on the newly created `LCD` folder and select `Add` again.”
+
+Click on the `Add Files` option, then select the two files you downloaded named `lcd.h` and `lcd.c`.
+
+And that’s it! Now you can run the project with confidence and enjoy it.
+
