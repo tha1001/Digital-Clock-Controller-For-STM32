@@ -66,5 +66,27 @@ paste this code in int main(void){ while (1){  /* USER CODE BEGIN 3 */
     
     lcd_gotoxy(0,0);
     lcd_puts(data);
-  
-   
+    
+And paste this code one line before while (1) {
+
+    lcd_init() ;
+    lcd_clear() ;
+    a=1 ;
+
+ And redefine these variables:
+
+    char data[17];
+    uint32_t sanyeh;
+    uint32_t daghyghe;
+    uint32_t saat;
+    uint8_t a = 1;
+
+And at the top of the main code, in this section:
+
+    /* Private includes ----------------------------------------------------------*/
+    /* USER CODE BEGIN Includes */
+
+ Add these two includes:
+
+    #include "LCD/lcd.h"
+    #include <stdio.h>
