@@ -1,102 +1,96 @@
-# Digital-Clock-Controller-For-STM32
-first download lcd.c and lcd.h.
-create folder and write name LCD.
-paste both of them in folder .
-copy folder.
-open the cubemx and select "STM32F103C8T6".
-set pa0,pa1,pa2,pa3,pa3,pa4,pa5 to Gpio_Output and set pb0,pb1,pb3 to Gpio_Input.
-Next,click generate code and waite.
-paste this code in int main(void){ while (1){  /* USER CODE BEGIN 3 */
+🕒 STM32 Digital Clock Controller (LCD Based)
 
+A simple and practical digital clock project using STM32F103C8T6 and 16x2 LCD display.
+This project allows you to set and adjust hours, minutes, and seconds using buttons.
 
+✨ Features
+⏰ Real-time digital clock display
+🖥️ LCD 16x2 interface support
+🔘 Button-based time adjustment
+⚙️ Easy configuration with STM32CubeMX
+📟 Lightweight and beginner-friendly code
+🧰 Hardware Requirements
+STM32F103C8T6 (Blue Pill)
+16x2 LCD Display
+Push Buttons × 3
+Breadboard + Jumper Wires
+USB to Serial / ST-Link Programmer
+📌 Pin Configuration (STM32CubeMX)
+GPIO Outputs:
+PA0 → PA5 (LCD data/control pins)
+GPIO Inputs:
+PB0 → Button (Decrease)
+PB1 → Button (Increase)
+PB3 → Mode Select
+📁 Project Setup
+1. LCD Library Setup
+Download lcd.c and lcd.h
+Create a folder named:
+LCD
+Paste both files inside it
+2. STM32CubeMX Configuration
+Select board: STM32F103C8T6
+Configure GPIO pins as shown above
+Generate code
+3. Add Library to Project
 
-    sprintf(data, "%02d   :%02d   :%02d", saat, daghyghe, sanyeh);
-    uint8_t c = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3);
-    uint8_t b = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1);
-    uint8_t d = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0);
+Copy the LCD folder into:
 
-   
-    if (c == 1) {
-        HAL_Delay(200);     
-        a++;
-        if (a > 3) a = 1;
-    }
+ProjectName/Core/Src
 
-    
-    lcd_gotoxy(0,1);
+Then:
 
-    if (a == 1) {
-      lcd_gotoxy(0,1);
-      lcd_puts("__            ");
-    }
-      if (a == 2){
-        lcd_gotoxy(0,1);
-        lcd_puts("      __      ");
-      }
-        if (a == 3){
-          lcd_gotoxy(0,1);
-          lcd_puts("            __");
-        }
-    
-    if (b == 1 & a == 1 ) {
-        HAL_Delay(200);   
-        saat++;
-    }
-    if (b == 1 & a == 2 ) {
-        HAL_Delay(200);   
-        daghyghe++;
-    }
-     if (b == 1 & a == 3 ) {
-        HAL_Delay(200);   
-        sanyeh++ ;
-    }
-   
-     if (d == 1 & a == 1 ) {
-        HAL_Delay(200);   
-        saat--;
-    }
-    if (d == 1 & a == 2 ) {
-        HAL_Delay(200);   
-        daghyghe--;
-    }
-     if (d == 1 & a == 3 ) {
-        HAL_Delay(200);   
-        sanyeh-- ;
-    }
-    
-    lcd_gotoxy(0,0);
-    lcd_puts(data);
-    
-And paste this code one line before while (1) {
+Open your IDE (IAR / Keil / STM32CubeIDE)
+Right click on DRIVERS
+Create new folder → LCD
+Add files:
+lcd.c
+lcd.h
+🧠 Main Code Integration
+🔹 Add Includes
 
-    lcd_init() ;
-    lcd_clear() ;
-    a=1 ;
+Inside:
 
- And redefine these variables:
+/* USER CODE BEGIN Includes */
 
-    char data[17];
-    uint32_t sanyeh;
-    uint32_t daghyghe;
-    uint32_t saat;
-    uint8_t a = 1;
+Add:
 
-And at the top of the main code, in this section:
+#include "LCD/lcd.h"
+#include <stdio.h>
 
-    /* Private includes ----------------------------------------------------------*/
-    /* USER CODE BEGIN Includes */
+🔹 Add Variables in main
+char data[17];
+uint32_t sanyeh;
+uint32_t daghyghe;
+uint32_t saat;
+uint8_t a = 1;
+🔹 Initialization (Before while(1))
+lcd_init();
+lcd_clear();
+a = 1;
+🔁 Main Loop Logic
 
- Add these two includes:
+Inside while (1):
 
-    #include "LCD/lcd.h"
-    #include <stdio.h>
-“Now, before running the code, copy the LCD folder into this path:”
+Display time on LCD
+Read button inputs
+Switch between:
+Hours ⏰
+Minutes ⏱️
+Seconds ⌛
+Increase / decrease selected value
+🚀 How It Works
+Button 1 → Switch between time fields
+Button 2 → Increase value
+Button 3 → Decrease value
+LCD highlights selected field
+📷 Output Example
+12 : 45 : 30
+      __
+📌 Notes
+Add small delays to avoid button bouncing
+Ensure LCD wiring is correct
+Initialize all variables properly
+🎯 Result
 
-ProjectName\Core\Src
-
-“In the IAR Embedded Workbench coding environment, right-click on the `DRIVERS` folder, then click `Add` and create a new folder named `LCD`. After creating it, right-click on the newly created `LCD` folder and select `Add` again.”
-
-Click on the `Add Files` option, then select the two files you downloaded named `lcd.h` and `lcd.c`.
-
-And that’s it! Now you can run the project with confidence and enjoy it.
-
+After setup, you will have a fully working digital clock system on STM32 with LCD control 🎉
